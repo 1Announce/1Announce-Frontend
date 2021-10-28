@@ -53,6 +53,7 @@ body {
   margin: 5px;
   padding: 10px 20px;
   cursor: pointer;
+  position: relative;
 }
 .add-form {
   margin-bottom: 40px;

@@ -5,7 +5,7 @@ const Announcement = ({announcement, onDelete}) =>{
     <div className='announcement'>
       <h3>
         {announcement.text}
-        <FaTimes style={{color:'red', cursor: 'pointer', margin:'0px 0px 0px 90%'}}
+        <FaTimes style={{color:'red', cursor: 'pointer', position:'absolute', right: '5%'}}
         onClick={()=>onDelete(announcement.id)}/>
       </h3>
       {/*need to add file here*/}

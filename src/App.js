@@ -2,9 +2,11 @@ import {useState} from 'react'
 import Announcements from './components/Announcements'
 import Cards from './components/Cards'
 import AddAnnouncement from './components/AddAnnouncement'
+import AddSchedule from './components/AddSchedule'
 
 function App() {
   const [showAddAnn, setShowAddAnn] = useState(false)
+  const [showAddSche, setShowAddSche] = useState(false)
   const[announcements, setAnnoucements] = useState([
     {
       id: 1,
@@ -33,8 +35,9 @@ return (
     <div className="container">
       <Cards title = '1. Draft Announcement' onAdd={()=>setShowAddAnn(!showAddAnn)} showAdd={showAddAnn}/>
       {showAddAnn && <AddAnnouncement onAdd={addAnnouncement}/>}
-      <Cards title = '2. Schedule' />
-      <Cards title = '3. Schedule' />
+      <Cards title = '2. Schedule' onAdd={()=>setShowAddSche(!showAddSche)} showAdd={showAddSche}/>
+      {showAddSche && <AddSchedule/>}
+      <Cards title = '3. Submit' />
       {announcements.length > 0 ? <Announcements announcements={announcements} onDelete={deleteAnnouncement}/> : 'No Announcements Created'}
     </div>
   );
