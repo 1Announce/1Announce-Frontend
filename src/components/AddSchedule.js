@@ -1,13 +1,28 @@
-import React from 'react'
+import * as React from 'react';
+import TextField from '@mui/material/TextField';
+import DateAdapter from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import DateTimePicker from '@mui/lab/DateTimePicker';
+import Stack from '@mui/material/Stack';
 import {useState} from 'react'
-import DateTimePicker from 'react-datetime-picker'
+
 
 const AddSchedule = () =>{
-  const [value, onChange] = useState(new Date())
+  const [value, setValue] = useState(new Date())
   return(
-    <div>
-      <DateTimePicker onChange={onChange} value={value}/>
-    </div>
+    <LocalizationProvider dateAdapter={DateAdapter}>
+      <Stack spacing={3}>
+        <DateTimePicker
+          renderInput={(params) => <TextField {...params} />}
+          label="Ignore date and time"
+          value={value}
+          onChange={(newValue) => {
+            setValue(newValue);
+          }}
+          minDateTime={new Date()}
+        />
+      </Stack>
+    </LocalizationProvider>
   )
 }
 
