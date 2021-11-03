@@ -10,12 +10,12 @@ function App() {
   const[announcements, setAnnoucements] = useState([
     {
       id: 1,
-      text: 'Meeting Starting Now!',
+      value: 'Meeting Starting Now!',
       //file: true,
     },
     {
       id: 2,
-      text: 'Meeting Starting in 10 minutes',
+      value: 'Meeting Starting in 10 minutes',
       //file: false,
     }
   ])
