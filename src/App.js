@@ -6,6 +6,7 @@ import Home from './pages/HomePage';
 
 function App() {
     return (
+
         <BrowserRouter>
             <Switch>
                 <Route path="/home">
