@@ -6,6 +6,20 @@
 }
 body {
   font-family: 'Poppins', sans-serif;
+  height: 100%;
+  margin: 0;
+}
+html{
+  height: 100%;
+    margin: 0;
+}
+hr{
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid black;
+    margin: 1em 0; padding: 0;
+
 }
 
 .container {
@@ -82,4 +96,12 @@ body {
   margin: 5px;
   padding: 3px 7px;
   font-size: 17px;
+}
+.googleButton{
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 35px;
+}
+.SignInBox{
+  margin-top: 100px;
 }
