@@ -1,7 +1,10 @@
+import {useState} from 'react'
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import {useAuthState} from 'react-firebase-hooks/auth';
 import GoogleButton from 'react-google-button';
+
 
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -26,11 +29,20 @@ firebase.initializeApp({
 
 const auth = firebase.auth();
 
+
+
+
+
 function SignIn(){
+
+
+
   const signInWithGoogle = () => {
     const provider = new firebase.auth.GoogleAuthProvider();
     auth.signInWithPopup(provider);
   }
+
+
   return(
     <Box
          sx={{
@@ -45,7 +57,7 @@ function SignIn(){
          <Typography component="h1" variant="h5">
            Sign In to Improve Your Announcement Experience
          </Typography>
-         <Box className='SignInBox' component="form" /*onSubmit={handleSubmit}*/ noValidate sx={{ mt: 1 }}>
+         <Box className='SignInBox' component="form" /*onSubmit={}*/ noValidate sx={{ mt: 1 }}>
           <GoogleButton className='googleButton' style={{width:'100%'}} onClick={signInWithGoogle}/>
           <hr></hr>
            <TextField
