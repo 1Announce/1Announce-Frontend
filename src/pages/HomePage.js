@@ -1,28 +1,40 @@
-import React from "react";
-import SignOut from '../components/SignOut'
-import {Redirect} from 'react-router-dom';
+import React, {useState} from "react";
+import {Link, useHistory} from 'react-router-dom';
 import 'firebase/compat/auth';
-import {useAuthState} from 'react-firebase-hooks/auth';
-import firebase from 'firebase/compat/app';
+import {useAuth} from '../contexts/AuthContext'
 
 import Button from '@mui/material/Button';
 
-const auth = firebase.auth();
 
 function Title() {
     return <h1>1Announce</h1>;
 }
 
 function Home() {
-  const [user] = useAuthState(auth);
-  if(!user){
-    return <Redirect to ='/'/>;
+  const {currentUser, logout} = useAuth()
+  const[error,setError] = useState("")
+  const history = useHistory()
+
+  async function handleSignout(){
+    setError('')
+
+    try{
+      await logout()
+      history.push('/signin')
+    }catch{
+      setError('Failed to Sign Out')
+    }
   }
+
     return (
-        <body>
+        <div>
             <h1>Home Screen</h1>
             <Title />
-            <SignOut/>
+            <strong>Email: </strong>{currentUser.email}
+              <Button
+                  variant="link" onClick={handleSignout}>
+                      Sign out
+              </Button>
             <Button
                 variant='contained'
                 color='primary'>
@@ -33,7 +45,7 @@ function Home() {
             <h2>Upcoming Announcements</h2>
 
             <h2>Past Announcements</h2>
-        </body>
+        </div>
     );
 }
 

@@ -34,7 +34,7 @@ function NavBar() {
           1<span style={{color: "red"}}>A</span>NNOUNCE
         </Typography>
           <div className={classes.navlinks}>
-            <Link to="/Home" className={classes.link}>
+            <Link to="/" className={classes.link}>
               Home
             </Link>
             <Link to="/about" className={classes.link}>

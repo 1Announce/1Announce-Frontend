@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import SplashImage from '../Images/SplashImage.png';
 import {Redirect} from 'react-router-dom';
 
@@ -17,7 +16,7 @@ const auth = firebase.auth();
 function Splash() {
   const [user] = useAuthState(auth);
     if(user){
-      return <Redirect to ='/Home'/>;
+      return <Redirect to ='/'/>;
     }
 
     return (
