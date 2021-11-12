@@ -27,7 +27,9 @@ function Signup(){
      if (passwordRef.current.value !== passwordConfirmRef.current.value) {
        return setError("Passwords do not match")
      }
-
+     if(passwordRef.current.value.length < 6 || passwordRef.current.value.length > 18){
+       return setError("Password length must be between 6-18 characters")
+     }
      try {
        setError("")
        setLoading('enable')
@@ -47,7 +49,7 @@ function Signup(){
        <Typography component="h1" variant="h5">
          Sign Up to Improve Your Announcement Experience
        </Typography>
-       <Box className='SignInBox' component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+       <Box className='SignInBox' component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }} style={{width:'700px'}}>
          {error && <Alert severity="error">{error}</Alert>}
          <TextField
            margin="normal"
@@ -58,6 +60,7 @@ function Signup(){
            autoComplete="email"
            autoFocus
            inputRef={emailRef}
+           style={{background:"#ffbb3f"}}
          />
          <TextField
            margin="normal"
@@ -67,6 +70,7 @@ function Signup(){
            label="Password"
            type="password"
            inputRef={passwordRef}
+           style={{background:"#ffbb3f"}}
          />
          <TextField
            margin="normal"
@@ -76,6 +80,7 @@ function Signup(){
            label="Password Confirmation"
            type="password"
            inputRef={passwordConfirmRef}
+           style={{background:"#ffbb3f"}}
          />
          <Button
            type="submit"

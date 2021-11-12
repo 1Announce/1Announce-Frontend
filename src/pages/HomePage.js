@@ -32,7 +32,7 @@ function Home() {
             <Title />
             <strong>Email: </strong>{currentUser.email}
               <Button
-                  variant="link" onClick={handleSignout}>
+                  variant="contained" onClick={handleSignout}>
                       Sign out
               </Button>
             <Button

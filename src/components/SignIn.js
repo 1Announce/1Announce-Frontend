@@ -8,8 +8,6 @@ import {useAuth} from '../contexts/AuthContext'
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -62,7 +60,7 @@ function SignIn(){
          <Typography component="h1" variant="h5">
            Sign In to Improve Your Announcement Experience
          </Typography>
-         <Box className='SignInBox' component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+         <Box className='SignInBox' component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }} style={{width:'700px'}}>
          {error && <Alert severity="error">{error}</Alert>}
           <GoogleButton className='googleButton' style={{width:'100%'}} onClick={()=>signInWithGoogle(googleProvider)}/>
           <hr></hr>
@@ -75,6 +73,7 @@ function SignIn(){
              autoComplete="email"
              inputRef={emailRef}
              autoFocus
+             style={{background:"#ffbb3f"}}
            />
            <TextField
              margin="normal"
@@ -85,10 +84,7 @@ function SignIn(){
              type="password"
              inputRef={passwordRef}
              autoComplete="current-password"
-           />
-           <FormControlLabel
-             control={<Checkbox value="remember" color="primary" />}
-             label="Remember me"
+             style={{background:"#ffbb3f"}}
            />
            <Button
              type="submit"
