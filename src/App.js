@@ -3,20 +3,23 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import Splash from './pages/SplashPage';
 import Home from './pages/HomePage';
+import SignupPage from './pages/SignupPage'
+import ForgotPassword from './components/ForgotPassword'
+import {AuthProvider} from "./contexts/AuthContext"
+import PrivateRoute from './components/PrivateRoute'
 
 function App() {
     return (
-
-        <BrowserRouter>
-            <Switch>
-                <Route path="/home">
-                    <Home />
-                </Route>
-                <Route>
-                    <Splash />
-                </Route>
-            </Switch>
-        </BrowserRouter>
+      <BrowserRouter>
+        <AuthProvider>
+          <Switch>
+              <PrivateRoute exact path="/" component={Home}/>
+              <Route path="/signin" component={Splash}/>
+              <Route path="/signup" component={SignupPage}/>
+              <Route path="/forgot-password" component={ForgotPassword}/>
+          </Switch>
+        </AuthProvider>
+      </BrowserRouter>
     );
 }
 

@@ -1,50 +1,40 @@
 import 'firebase/compat/auth';
-import GoogleButton from 'react-google-button';
 
 import {useRef,useState} from 'react'
-import {Link, useHistory} from "react-router-dom"
+import {Link} from "react-router-dom"
 import {useAuth} from '../contexts/AuthContext'
 
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Alert from '@mui/material/Alert';
 import {AuthProvider} from "../contexts/AuthContext"
-import {googleProvider} from "../contexts/AuthMethods"
 
 
-function SignIn(){
+function ForgotPassword(){
   const emailRef = useRef()
-  const passwordRef = useRef()
-  const {login} = useAuth()
-  const {socialMediaAuth} = useAuth()
+  const {resetPassword} = useAuth()
   const [error, setError] = useState('')
+  const [message, setMessage] = useState('')
   const [loading, setLoading] = useState('disable')
-  const history = useHistory()
 
   async function handleSubmit(e){
     e.preventDefault()
 
      try {
+       setMessage("")
        setError("")
        setLoading('enable')
-       await login(emailRef.current.value, passwordRef.current.value)
-       history.push('/')
+      await resetPassword(emailRef.current.value)
+      setMessage('Check your inbox for further instrictions')
      } catch {
-       setError("Failed to sign in")
+       setError("Failed to reset password")
      }
      setLoading('disable')
-   }
-
-  async function signInWithGoogle(provider){
-    const res = await socialMediaAuth(provider);
-    console.log(res)
    }
 
   return(
@@ -60,12 +50,11 @@ function SignIn(){
            <LockOutlinedIcon />
          </Avatar>
          <Typography component="h1" variant="h5">
-           Sign In to Improve Your Announcement Experience
+           Password Rest
          </Typography>
          <Box className='SignInBox' component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
          {error && <Alert severity="error">{error}</Alert>}
-          <GoogleButton className='googleButton' style={{width:'100%'}} onClick={()=>signInWithGoogle(googleProvider)}/>
-          <hr></hr>
+         {message && <Alert severity="info"> {message}</Alert>}
            <TextField
              margin="normal"
              required
@@ -76,20 +65,6 @@ function SignIn(){
              inputRef={emailRef}
              autoFocus
            />
-           <TextField
-             margin="normal"
-             required
-             fullWidth
-             name="password"
-             label="Password"
-             type="password"
-             inputRef={passwordRef}
-             autoComplete="current-password"
-           />
-           <FormControlLabel
-             control={<Checkbox value="remember" color="primary" />}
-             label="Remember me"
-           />
            <Button
              type="submit"
              fullWidth
@@ -97,12 +72,12 @@ function SignIn(){
              sx={{ mt: 3, mb: 2 }}
              disable={loading}
            >
-             Sign In
+             Reset Password
            </Button>
            <Grid container>
              <Grid item xs>
-               <Link to="/forgot-password">
-                 Forgot password?
+               <Link to="/signin">
+                 Sign In
                </Link>
              </Grid>
              <Grid item>
@@ -118,4 +93,4 @@ function SignIn(){
 
 }
 
-export default SignIn
+export default ForgotPassword
