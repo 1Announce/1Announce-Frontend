@@ -21,7 +21,7 @@ function Splash() {
 
     return (
       <div>
-        <NavBar/>
+        <NavBar text1={'Sign Up'} link1={'/signup'}/>
           <div style={{backgroundImage: `url(${SplashImage})`, backgroundPosition: 'center', backgroundSize: 'cover ', backgroundRepeat: 'no-repeat', width: '100vw', height: '93vh'}}>
             <SignIn/>
           </div>
