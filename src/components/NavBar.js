@@ -1,6 +1,7 @@
 import React from "react";
 import {AppBar, Toolbar, CssBaseline, Typography, makeStyles,} from "@material-ui/core";
 import { Link } from "react-router-dom";
+import Button from '@mui/material/Button';
 
 const useStyles = makeStyles((theme) => ({
   navlinks: {
@@ -24,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function NavBar() {
+function NavBar({text1, link1, bClick, bText}) {
   const classes = useStyles();
     return (
       <AppBar position="static" style={{background:'white'}}>
@@ -34,12 +35,15 @@ function NavBar() {
           1<span style={{color: "red"}}>A</span>NNOUNCE
         </Typography>
           <div className={classes.navlinks}>
-            <Link to="/" className={classes.link}>
-              Home
+            <Link to={link1} className={classes.link}>
+              {text1}
             </Link>
-            <Link to="/about" className={classes.link}>
-              About
-            </Link>
+            if(bClick){
+
+            }
+          <Button variant="text" onClick={bClick}>
+            {bText}
+          </Button>
           </div>
       </Toolbar>
     </AppBar>
