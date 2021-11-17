@@ -1,24 +1,33 @@
+import React,  {useState} from "react";
+import {useHistory} from 'react-router-dom';
+
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Alert from '@mui/material/Alert';
-
-import NavBar from '../components/NavBar'
-
-import React,  {useState} from "react";
-import {useHistory} from 'react-router-dom';
-import 'firebase/compat/auth';
-import {useAuth} from '../contexts/AuthContext'
-
 import Button from '@mui/material/Button';
 
+import 'firebase/compat/auth';
+import {useAuth} from '../contexts/AuthContext'
+import NavBar from '../components/NavBar';
+import ApiManager from '../api/api-manager';
 
 function Home() {
   const {currentUser, logout} = useAuth()
   const[error,setError] = useState("")
-  const history = useHistory()
+  const history = useHistory();
+
+  const observable = ApiManager.getAnnouncements();
+  observable.subscribe({
+    next: () => {
+      console.log('Successful!', ApiManager.announcements);
+    },
+    error: err => {
+      console.log('Error!', err);
+    }
+  });
 
   async function handleSignout(){
     setError('')
