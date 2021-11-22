@@ -1,10 +1,10 @@
-import Button from './Button'
+import Buttons from './Button'
 
 const Cards = ({title, onAdd, showAdd}) => {
   return(
     <header className='header'>
       <h1>{title}</h1>
-      <Button color={showAdd ? 'red' : 'green'} text={showAdd ? 'Close' : 'Add'} onClick={onAdd}/>
+      <Buttons color={showAdd ? 'red' : 'green'} text={showAdd ? 'Close' : 'Add'} onClick={onAdd}/>
     </header>
   )
 }

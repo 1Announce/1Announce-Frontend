@@ -30,7 +30,7 @@ const AddAnnouncement = ({onAdd}) =>{
   }
   return(
     <div className='form-control' >
-      <label>Announcement</label>
+
       <Box component="form" sx={{'& .MuiTextField-root': { m: 1, width: '100%' },}} noValidate autoComplete="off" onSubmit={onSubmit}>
         <TextField
           id="outlined-multiline-flexible"
@@ -40,12 +40,11 @@ const AddAnnouncement = ({onAdd}) =>{
           value={value}
           onChange={(e)=> setValue(e.target.value)}
         />
-        <label>Attachment</label>
         <Stack direction="row" alignItems="center" spacing={2}>
           <label htmlFor="contained-button-file">
             <Input accept="image/*" id="contained-button-file" multiple type="file" />
-            <Button variant="contained" component="span">
-              Upload
+            <Button variant="contained" component="span" sx={{m:1}}>
+              Attachment
             </Button>
           </label>
         </Stack>

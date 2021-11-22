@@ -1,5 +1,5 @@
 import React,  {useState} from "react";
-import {useHistory} from 'react-router-dom';
+import {useHistory, Link} from 'react-router-dom';
 
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
@@ -75,6 +75,8 @@ function Home() {
                 <Button
                     variant='contained'
                     color='primary'
+                    component={Link}
+                    to='/create'
                     sx={{ mt: 1, mb: 1 }}
                     style={{maxWidth:'300px', float:'right'}}>
                         Create Announcement
@@ -111,25 +113,6 @@ function Home() {
           </Container>
         </Box>
       </Box>
-        /*<div>
-            <h1>Home Screen</h1>
-            <Title />
-            <strong>Email: </strong>{currentUser.email}
-              <Button
-                  variant="contained" onClick={handleSignout}>
-                      Sign out
-              </Button>
-            <Button
-                variant='contained'
-                color='primary'>
-                    Create Announcement
-            </Button>
-
-
-            <h2>Upcoming Announcements</h2>
-
-            <h2>Past Announcements</h2>
-        </div>*/
     );
 }
 
