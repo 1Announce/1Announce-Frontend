@@ -18,6 +18,10 @@ class ApiManager {
         });
         return observable;
     }
+
+    static createAnnouncement(){
+      
+    }
 }
 
 module.exports = ApiManager;

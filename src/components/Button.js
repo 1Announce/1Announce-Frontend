@@ -1,25 +1,16 @@
-import PropTypes from 'prop-types'
+import Button from '@mui/material/Button'
 
-const Button = ({color, text, onClick}) => {
+const Buttons = ({color, text, onClick}) => {
 
   return (
-    <button
+    <Button
       onClick={onClick}
-      style={{backgroundColor: color}}
+      style={{backgroundColor: color, color:'white'}}
       className='btn'
       >
         {text}
-    </button>
+    </Button>
   )
 }
 
-Button.defaultProps = {
-  color: 'steelblue'
-}
-
-Button.propTypes = {
-  text: PropTypes.string,
-  color: PropTypes.string,
-  onClick: PropTypes.func,
-}
-export default Button
+export default Buttons

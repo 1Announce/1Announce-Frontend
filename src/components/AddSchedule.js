@@ -14,7 +14,7 @@ const AddSchedule = () =>{
       <Stack spacing={3}>
         <DateTimePicker
           renderInput={(params) => <TextField {...params} />}
-          label="Ignore date and time"
+          label="Schedule your announcement"
           value={value}
           onChange={(newValue) => {
             setValue(newValue);
