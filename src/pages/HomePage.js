@@ -13,6 +13,7 @@ import 'firebase/compat/auth';
 import {useAuth} from '../contexts/AuthContext'
 import NavBar from '../components/NavBar';
 import ApiManager from '../api/api-manager';
+import Announcement from "../components/Announcement";
 
 function Home() {
   const {currentUser, logout} = useAuth()
@@ -20,14 +21,7 @@ function Home() {
   const history = useHistory();
 
   const observable = ApiManager.getAnnouncements();
-  observable.subscribe({
-    next: () => {
-      console.log('Successful!', ApiManager.announcements);
-    },
-    error: err => {
-      console.log('Error!', err);
-    }
-  });
+  
 
   async function handleSignout(){
     setError('')

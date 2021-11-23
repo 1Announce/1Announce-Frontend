@@ -8,6 +8,7 @@ import SignupPage from './pages/SignupPage'
 import ForgotPassword from './components/ForgotPassword'
 import {AuthProvider} from "./contexts/AuthContext"
 import PrivateRoute from './components/PrivateRoute'
+import CreateAnnouncementPage from "./pages/CreateAnnouncementPage";
 
 function App() {
     return (
@@ -18,7 +19,7 @@ function App() {
               <Route path="/signin" component={Splash}/>
               <Route path="/signup" component={SignupPage}/>
               <Route path="/forgot-password" component={ForgotPassword}/>
-              <PrivateRoute exact path="/create" component={Create}/>
+              <PrivateRoute exact path="/create" component={CreateAnnouncementPage}/>
           </Switch>
         </AuthProvider>
       </BrowserRouter>
