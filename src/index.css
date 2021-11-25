@@ -84,3 +84,8 @@ hr{
   margin-right: auto;
   margin-bottom: 35px;
 }
+.AnnouncementNumber, .AnnouncementButton{
+  display: inline-block;
+  vertical-align: middle;
+  margin: 5px;
+}
