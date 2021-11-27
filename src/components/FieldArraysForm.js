@@ -13,21 +13,12 @@ const uploadImage = async (e) => {
   console.log(e.target.files)
   const file = e.target.files[0]
   // add check for file type
-
   const base64 = await convertBase64(file);
   return { filename: file.name, base64 };
-
-  // await convertBase64(file).then(base64 => {
-  //   const output = { filename: file.name, base64 };
-  //   // console.log('output=', output)
-  //   return output;
-  // }).catch(err => {
-  //   console.log('Failed to base64 encode file. Err =', err);
-  //   return undefined;
-  // })
 }
 
 const convertBase64 = async (file) => {
+  // add check for file type
   return new Promise((resolve, reject) => {
     const fileReader = new FileReader();
     fileReader.readAsDataURL(file);
