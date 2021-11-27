@@ -9,23 +9,34 @@ import IconButton from '@mui/material/IconButton';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
 
 
-const uploadImage = async(e) =>{
+const uploadImage = async (e) => {
   console.log(e.target.files)
   const file = e.target.files[0]
-  const base64 = await convertBase64(file)
-  console.log(base64)
+  // add check for file type
+
+  const base64 = await convertBase64(file);
+  return { filename: file.name, base64 };
+
+  // await convertBase64(file).then(base64 => {
+  //   const output = { filename: file.name, base64 };
+  //   // console.log('output=', output)
+  //   return output;
+  // }).catch(err => {
+  //   console.log('Failed to base64 encode file. Err =', err);
+  //   return undefined;
+  // })
 }
 
-const convertBase64=(file)=>{
-  return new Promise((resolve,reject)=>{
+const convertBase64 = async (file) => {
+  return new Promise((resolve, reject) => {
     const fileReader = new FileReader();
     fileReader.readAsDataURL(file);
 
-    fileReader.onload = (()=>{
+    fileReader.onload = (() => {
       resolve(fileReader.result);
     });
 
-    fileReader.onerror = ((error)=>{
+    fileReader.onerror = ((error) => {
       reject(error);
     })
   })
@@ -33,8 +44,8 @@ const convertBase64=(file)=>{
 
 const renderField = ({ input, label, type, meta: { touched, error } }) => (
   <TextField
-    label = {label}
-    placeholder = {label}
+    label={label}
+    placeholder={label}
     error={error}
     helperText={error}
     {...input}
@@ -42,9 +53,16 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => (
 )
 
 const fileField = ({ input, label, type, meta: { touched, error } }) => (
-<input  id="file" type="file" onChange={(e) => {
-    input.onChange(uploadImage(e));
-  }}/>
+  <input id="file" type="file" onChange={(e) => {
+    uploadImage(e)
+    .then(metadata => {
+      console.log('output=', metadata)
+      input.onChange(metadata)
+    })
+    .catch(err => {
+      console.log('Upload Image failed! err=', err);
+    });
+  }} />
 )
 
 const renderAttachment = ({ fields, meta: { error } }) => (
@@ -86,25 +104,25 @@ const renderAnnouncement = ({ fields, meta: { error, submitFailed } }) => (
             //border: 1
           }}
         >
-        <div style={{display: 'flex', flexDirection: 'row'}}>
-          <h3 className='AnnouncementNumber'>Announcement #{index + 1}</h3>
+          <div style={{ display: 'flex', flexDirection: 'row' }}>
+            <h3 className='AnnouncementNumber'>Message #{index + 1}</h3>
             <IconButton aria-label="delete" onClick={() => fields.remove(index)}>
               <DeleteIcon />
             </IconButton>
-        </div>
+          </div>
 
-        <Field
-          name={`${announcement}.text`}
-          type="text"
-          component={renderField}
-          label="Announcement"
-        />
-      <FieldArray name={`${announcement}.attachments`} component={renderAttachment} />
+          <Field
+            name={`${announcement}.text`}
+            type="text"
+            component={renderField}
+            label="Announcement"
+          />
+          <FieldArray name={`${announcement}.attachments`} component={renderAttachment} />
         </Paper>
       </li>
     ))}
     <li>
-      <Button variant="contained" component="span" sx={{m:1}} onClick={() => fields.push({})}>
+      <Button variant="contained" component="span" sx={{ m: 1 }} onClick={() => fields.push({})}>
         Add Announcement
       </Button>
       {submitFailed && error && <span>{error}</span>}
@@ -115,26 +133,26 @@ const renderAnnouncement = ({ fields, meta: { error, submitFailed } }) => (
 const MyForm = ({ handleSubmit, pristine, reset, submitting }) => {
   return (
     <Paper
-      style ={{backgroundColor:'#cccccc'}}
+      style={{ backgroundColor: '#cccccc' }}
       sx={{
         p: 2,
         display: 'flex',
         flexDirection: 'column',
       }}
     >
-    <h1>1. Draft Announcements</h1>
+      <h1>1. Draft Announcements</h1>
 
-    <form onSubmit={handleSubmit}>
-      <FieldArray name="announcment" component={renderAnnouncement} />
-      <div>
-        <button type="submit" disabled={submitting} className='btn btn-block'>
-          Submit
-        </button>
-        <button type="button" disabled={pristine || submitting} onClick={reset} className='btn btn-block'>
-          Clear Values
-        </button>
-      </div>
-    </form>
+      <form onSubmit={handleSubmit}>
+        <FieldArray name="announcment" component={renderAnnouncement} />
+        <div>
+          <button type="submit" disabled={submitting} className='btn btn-block'>
+            Submit
+          </button>
+          <button type="button" disabled={pristine || submitting} onClick={reset} className='btn btn-block'>
+            Clear Values
+          </button>
+        </div>
+      </form>
     </Paper>
 
   )
