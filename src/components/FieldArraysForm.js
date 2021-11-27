@@ -115,7 +115,7 @@ const renderAnnouncement = ({ fields, meta: { error, submitFailed } }) => (
 const MyForm = ({ handleSubmit, pristine, reset, submitting }) => {
   return (
     <Paper
-      style ={{backgroundColor:'#e3fdfd'}}
+      style ={{backgroundColor:'#cccccc'}}
       sx={{
         p: 2,
         display: 'flex',

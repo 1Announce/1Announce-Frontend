@@ -38,9 +38,6 @@ function NavBar({text1, link1, bClick, bText}) {
             <Link to={link1} className={classes.link}>
               {text1}
             </Link>
-            if(bClick){
-
-            }
           <Button variant="text" onClick={bClick}>
             {bText}
           </Button>
