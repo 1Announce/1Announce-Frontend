@@ -13,6 +13,7 @@ import 'firebase/compat/auth';
 import {useAuth} from '../contexts/AuthContext'
 import NavBar from '../components/NavBar';
 import ApiManager from '../api/api-manager';
+import Data from '../components/Tables'
 
 function Home() {
   const {currentUser, logout} = useAuth()
@@ -41,7 +42,6 @@ function Home() {
   }
 
     return (
-    //  <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
         <Box
@@ -60,7 +60,6 @@ function Home() {
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             {error && <Alert severity="error">{error}</Alert>}
             <Grid container spacing={3}>
-              {/* Chart */}
               <Grid item xs={12}>
                 <Paper
                   sx={{
@@ -83,7 +82,7 @@ function Home() {
                 </Button>
                 </Paper>
               </Grid>
-              {/* Recent Deposits */}
+
               <Grid item xs={12}>
                 <Paper
                   sx={{
@@ -95,9 +94,10 @@ function Home() {
                 >
                 <h1> Upcoming Announcements</h1>
                 <hr></hr>
+                <Data/>
                 </Paper>
               </Grid>
-              {/* Recent Orders */}
+
               <Grid item xs={12}>
                 <Paper sx={{
                   p: 2,
@@ -107,6 +107,7 @@ function Home() {
                 }}>
                 <h1> Past Announcements</h1>
                 <hr></hr>
+                <Data/>
                 </Paper>
               </Grid>
             </Grid>
