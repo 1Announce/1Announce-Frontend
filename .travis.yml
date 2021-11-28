@@ -1,2 +1,18 @@
 language: node_js
+node_js:
+- 16.13.0
+cache: npm
 
+
+install: 
+  - npm ci
+
+script: 
+  - npm test
+
+deploy:
+  provide: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  on:
+    branch: gh-pages
