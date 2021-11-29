@@ -1,4 +1,4 @@
-import React,  {useState} from "react";
+import React,  {useState, useEffect} from "react";
 import {useHistory, Link} from 'react-router-dom';
 
 import CssBaseline from '@mui/material/CssBaseline';
@@ -13,22 +13,26 @@ import 'firebase/compat/auth';
 import {useAuth} from '../contexts/AuthContext'
 import NavBar from '../components/NavBar';
 import ApiManager from '../api/api-manager';
-import Data from '../components/Tables'
+import BuildTable from '../components/Tables'
 
 function Home() {
   const {currentUser, logout} = useAuth()
   const[error,setError] = useState("")
+  const[announcements, setAnnoucements] = useState([])
   const history = useHistory();
 
-  const observable = ApiManager.getAnnouncements();
-  observable.subscribe({
-    next: () => {
-      console.log('Successful!', ApiManager.announcements);
-    },
-    error: err => {
-      console.log('Error!', err);
-    }
-  });
+  useEffect(() => {
+    const observable = ApiManager.getAnnouncements();
+    observable.subscribe({
+      next: () => {
+        console.log('Successful!', ApiManager.announcements);
+        setAnnoucements(ApiManager.announcements)
+      },
+      error: err => {
+        console.log('Error!', err);
+      }
+    });
+  }, [currentUser]);
 
   async function handleSignout(){
     setError('')
@@ -89,12 +93,12 @@ function Home() {
                     p: 2,
                     display: 'flex',
                     flexDirection: 'column',
-                    height: 240,
+                    minHeight: 240,
                   }}
                 >
                 <h1> Upcoming Announcements</h1>
                 <hr></hr>
-                <Data/>
+                <BuildTable data={announcements}/>
                 </Paper>
               </Grid>
 
@@ -103,11 +107,12 @@ function Home() {
                   p: 2,
                   display: 'flex',
                   flexDirection: 'column',
-                  height: 240,
+                  minHeight: 240,
+
                 }}>
                 <h1> Past Announcements</h1>
                 <hr></hr>
-                <Data/>
+                <BuildTable data={announcements}/>
                 </Paper>
               </Grid>
             </Grid>

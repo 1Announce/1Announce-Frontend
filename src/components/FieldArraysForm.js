@@ -124,7 +124,7 @@ const renderAnnouncement = ({fields, meta: { error, submitFailed }}) => (
         </div>
 
         <Field name={`${announcement}.text`} type="text" component={RenderTextField} label="Announcement"/>
-        <FieldArray name={`${announcement}.attachments`} component={RenderAttachmentField}/>
+        <FieldArray name={`${announcement}.message`} component={RenderAttachmentField}/>
       </Paper>
     </li>))
   }
@@ -166,7 +166,7 @@ const MyForm = ({handleSubmit, reset, submitting}) => {
           flexDirection: 'column'
         }}>
         <h1>2. Schedule</h1>
-        <Field name="Schedule" value={new Date()} type="dateTime" component={RenderDateTimePickerField} label="Schedule"/>
+        <Field name="schedule" value={new Date()} type="dateTime" component={RenderDateTimePickerField} label="schedule"/>
       </Paper>
 
       <Paper style={{
