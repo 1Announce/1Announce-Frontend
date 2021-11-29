@@ -6,7 +6,9 @@ cache: npm
 
 install: 
   - npm ci
-
+  - npm install
+before script:
+  - npm start
 script: 
   - npm test
 
