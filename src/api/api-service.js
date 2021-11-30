@@ -8,8 +8,8 @@ class ApiService {
         return from( axios.get(this.SERVICE_URL + 'announcements') );
     }
 
-    static createAnnouncement(announcement){
-      return from (axios.post(this.SERVICE_URL + 'announcement', {...announcement}))
+    static createAnnouncement(data){
+      return from (axios.post(this.SERVICE_URL + 'announcement', data))
     }
 }
 
