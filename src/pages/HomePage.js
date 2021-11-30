@@ -18,7 +18,7 @@ import BuildTable from '../components/Tables'
 function Home() {
   const {currentUser, logout} = useAuth()
   const[error,setError] = useState("")
-  const[announcements, setAnnoucements] = useState([])
+  const[announcements, setAnnoucements] = useState({ announcements: [], upcoming: [], past: [] })
   const history = useHistory();
 
   useEffect(() => {
@@ -26,7 +26,16 @@ function Home() {
     observable.subscribe({
       next: () => {
         console.log('Successful!', ApiManager.announcements);
-        setAnnoucements(ApiManager.announcements)
+
+        const now = Date.now();
+
+        const data = {
+          announcements: ApiManager.announcements,
+          upcoming: ApiManager.announcements.filter(anc => anc.schedule > now),
+          past: ApiManager.announcements.filter(anc => anc.schedule <= now)
+        }
+
+        setAnnoucements(data)
       },
       error: err => {
         console.log('Error!', err);
@@ -98,7 +107,7 @@ function Home() {
                 >
                 <h1> Upcoming Announcements</h1>
                 <hr></hr>
-                <BuildTable data={announcements}/>
+                <BuildTable data={announcements.upcoming}/>
                 </Paper>
               </Grid>
 
@@ -112,7 +121,7 @@ function Home() {
                 }}>
                 <h1> Past Announcements</h1>
                 <hr></hr>
-                <BuildTable data={announcements}/>
+                <BuildTable data={announcements.past}/>
                 </Paper>
               </Grid>
             </Grid>
