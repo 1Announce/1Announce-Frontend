@@ -21,6 +21,9 @@ hr{
     margin: 1em 0; padding: 0;
 
 }
+ul{
+  list-style-type: none;
+}
 
 .container {
   max-width: 90%;
@@ -83,4 +86,9 @@ hr{
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 35px;
+}
+.AnnouncementNumber, .AnnouncementButton{
+  display: inline-block;
+  vertical-align: middle;
+  margin: 5px;
 }
