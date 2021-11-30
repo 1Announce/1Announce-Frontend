@@ -3,7 +3,6 @@ import MyForm from "../components/FieldArraysForm"
 import showResults from "../components/ShowResults";
 
 import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
 
 import NavBar from '../components/NavBar';
 
@@ -23,9 +22,8 @@ function Create () {
       }}
     >
       <NavBar text1={'Home'}  link1={'/'}/>
-      <Container maxWidth={false}  sx={{ mt:4, mb:4, width: '85%'}}>
-        <MyForm onSubmit={showResults}/>
-      </Container>
+      <MyForm onSubmit={showResults}/>
+
     </Box>
 
   )
