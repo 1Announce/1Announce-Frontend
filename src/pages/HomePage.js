@@ -1,4 +1,4 @@
-import React,  {useState} from "react";
+import React,  {useState, useEffect} from "react";
 import {useHistory, Link} from 'react-router-dom';
 
 import CssBaseline from '@mui/material/CssBaseline';
@@ -13,15 +13,26 @@ import 'firebase/compat/auth';
 import {useAuth} from '../contexts/AuthContext'
 import NavBar from '../components/NavBar';
 import ApiManager from '../api/api-manager';
-import Announcement from "../components/Announcement";
+import BuildTable from '../components/Tables'
 
 function Home() {
   const {currentUser, logout} = useAuth()
   const[error,setError] = useState("")
+  const[announcements, setAnnoucements] = useState([])
   const history = useHistory();
 
-  const observable = ApiManager.getAnnouncements();
-  
+  useEffect(() => {
+    const observable = ApiManager.getAnnouncements();
+    observable.subscribe({
+      next: () => {
+        console.log('Successful!', ApiManager.announcements);
+        setAnnoucements(ApiManager.announcements)
+      },
+      error: err => {
+        console.log('Error!', err);
+      }
+    });
+  }, [currentUser]);
 
   async function handleSignout(){
     setError('')
@@ -35,7 +46,6 @@ function Home() {
   }
 
     return (
-    //  <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
         <Box
@@ -54,7 +64,6 @@ function Home() {
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             {error && <Alert severity="error">{error}</Alert>}
             <Grid container spacing={3}>
-              {/* Chart */}
               <Grid item xs={12}>
                 <Paper
                   sx={{
@@ -77,30 +86,33 @@ function Home() {
                 </Button>
                 </Paper>
               </Grid>
-              {/* Recent Deposits */}
+
               <Grid item xs={12}>
                 <Paper
                   sx={{
                     p: 2,
                     display: 'flex',
                     flexDirection: 'column',
-                    height: 240,
+                    minHeight: 240,
                   }}
                 >
                 <h1> Upcoming Announcements</h1>
                 <hr></hr>
+                <BuildTable data={announcements}/>
                 </Paper>
               </Grid>
-              {/* Recent Orders */}
+
               <Grid item xs={12}>
                 <Paper sx={{
                   p: 2,
                   display: 'flex',
                   flexDirection: 'column',
-                  height: 240,
+                  minHeight: 240,
+
                 }}>
                 <h1> Past Announcements</h1>
                 <hr></hr>
+                <BuildTable data={announcements}/>
                 </Paper>
               </Grid>
             </Grid>
