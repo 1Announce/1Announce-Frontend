@@ -154,7 +154,7 @@ const MyForm = ({handleSubmit, reset, submitting}) => {
           flexDirection: 'column'
         }}>
         <h1>1. Draft Announcements</h1>
-        <FieldArray name="announcment" component={renderAnnouncement} />
+        <FieldArray name="messages" component={renderAnnouncement} />
 
       </Paper>
       <Paper style={{
