@@ -1,7 +1,6 @@
-const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+import ApiManager from "../api/api-manager";
 
-export default (async function showResults(values) {
-  await sleep(500); // simulate server latency
-  console.log(values);
+export default (async function showResults(values, id) {
+  ApiManager.createAnnouncement(id, values);
   window.alert(`You submitted:\n\n${JSON.stringify(values, 1, 2)}`);
 });

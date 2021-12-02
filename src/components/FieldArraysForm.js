@@ -1,6 +1,8 @@
 import React from 'react'
 import {Field, FieldArray, reduxForm} from 'redux-form'
 import {useState} from 'react'
+import {useAuth} from '../contexts/AuthContext'
+import showResults from "../components/ShowResults";
 
 import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
@@ -61,7 +63,7 @@ const RenderDateTimePickerField = ({input})=>{
             value={input.value ? value : null}
             onChange={(newValue) => {
               setValue(newValue);
-              input.onChange(value.getTime())
+              input.onChange(newValue.getTime())
             }}
           />
         </Stack>
@@ -139,12 +141,17 @@ const renderAnnouncement = ({fields, meta: { error, submitFailed }}) => (
 </ul>)
 
 const MyForm = ({handleSubmit, reset, submitting}) => {
+  const {currentUser} = useAuth()
+  var userId = currentUser.uid
+
+
   return (<Container maxWidth={false} sx={{
       mt: 4,
       mb: 4,
       width: '85%'
     }}>
-    <form onSubmit={handleSubmit}>
+
+    <form onSubmit={handleSubmit((values) => {showResults(values, userId)})}>
       <Paper style={{
           backgroundColor: '#cccccc'
         }} sx={{
@@ -154,7 +161,7 @@ const MyForm = ({handleSubmit, reset, submitting}) => {
           flexDirection: 'column'
         }}>
         <h1>1. Draft Announcements</h1>
-        <FieldArray name="announcment" component={renderAnnouncement} />
+        <FieldArray name="messages" component={renderAnnouncement} />
 
       </Paper>
       <Paper style={{
