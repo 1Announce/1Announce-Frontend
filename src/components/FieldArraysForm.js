@@ -63,7 +63,7 @@ const RenderDateTimePickerField = ({input})=>{
             value={input.value ? value : null}
             onChange={(newValue) => {
               setValue(newValue);
-              input.onChange(value.getTime())
+              input.onChange(newValue.getTime())
             }}
           />
         </Stack>
