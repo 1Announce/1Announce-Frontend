@@ -30,7 +30,7 @@ function BuildTable({data}){
               <TableCell>{'Discord'}</TableCell>
 
               <TableCell>{ !!d.messages && d.messages.length > 0 ? d.messages[0].text : ""}</TableCell>
-              
+
             </TableRow>
           ))}
         </TableBody>
