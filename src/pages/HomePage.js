@@ -31,8 +31,8 @@ function Home() {
 
         const data = {
           announcements: ApiManager.announcements,
-          upcoming: ApiManager.announcements.filter(anc => anc.schedule > now),
-          past: ApiManager.announcements.filter(anc => anc.schedule <= now)
+          upcoming: ApiManager.announcements.filter(anc => anc.schedule > now).filter(anc => anc.userId === currentUser.uid),
+          past: ApiManager.announcements.filter(anc => anc.schedule <= now).filter(anc => anc.userId === currentUser.uid)
         }
 
         setAnnoucements(data)

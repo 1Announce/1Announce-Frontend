@@ -26,7 +26,7 @@ function BuildTable({data}){
         <TableBody >
           {data.map((d)=>(
             <TableRow key={d.id}>
-              <TableCell>{new Date(d.createTime).toLocaleString()}</TableCell>
+              <TableCell>{new Date(d.schedule).toLocaleString()}</TableCell>
               <TableCell>{'Discord'}</TableCell>
 
               <TableCell>{ !!d.messages && d.messages.length > 0 ? d.messages[0].text : ""}</TableCell>
