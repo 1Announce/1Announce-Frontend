@@ -90,9 +90,9 @@ const fileField = ({input, type, meta: { touched, error}}) => (
 const RenderAttachmentField = ({fields, meta: {error}}) => (
   <ul>
     <li>
-      <Button variant="contained" endIcon={<AttachFileIcon />} onClick={() => fields.push()}>
+      {/*<Button variant="contained" endIcon={<AttachFileIcon />} onClick={() => fields.push()}>
         Add Attachment
-      </Button>
+      </Button>*/}
     </li>
     {
       fields.map((attachment, index) => (<li key={index}>
