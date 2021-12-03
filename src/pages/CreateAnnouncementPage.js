@@ -1,6 +1,5 @@
 import React from "react";
 import MyForm from "../components/FieldArraysForm"
-import showResults from "../components/ShowResults";
 
 import Box from '@mui/material/Box';
 
@@ -22,7 +21,7 @@ function Create () {
       }}
     >
       <NavBar text1={'Home'}  link1={'/'}/>
-      <MyForm onSubmit={showResults}/>
+      <MyForm />
 
     </Box>
 

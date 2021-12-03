@@ -1,6 +1,9 @@
 import React from 'react'
 import {Field, FieldArray, reduxForm} from 'redux-form'
 import {useState} from 'react'
+import {useAuth} from '../contexts/AuthContext'
+import showResults from "../components/ShowResults";
+import {Link, useHistory} from "react-router-dom"
 
 import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
@@ -61,7 +64,7 @@ const RenderDateTimePickerField = ({input})=>{
             value={input.value ? value : null}
             onChange={(newValue) => {
               setValue(newValue);
-              input.onChange(value.getTime())
+              input.onChange(newValue.getTime())
             }}
           />
         </Stack>
@@ -87,9 +90,9 @@ const fileField = ({input, type, meta: { touched, error}}) => (
 const RenderAttachmentField = ({fields, meta: {error}}) => (
   <ul>
     <li>
-      <Button variant="contained" endIcon={<AttachFileIcon />} onClick={() => fields.push()}>
+      {/*<Button variant="contained" endIcon={<AttachFileIcon />} onClick={() => fields.push()}>
         Add Attachment
-      </Button>
+      </Button>*/}
     </li>
     {
       fields.map((attachment, index) => (<li key={index}>
@@ -139,12 +142,21 @@ const renderAnnouncement = ({fields, meta: { error, submitFailed }}) => (
 </ul>)
 
 const MyForm = ({handleSubmit, reset, submitting}) => {
+  const history = useHistory()
+  const {currentUser} = useAuth()
+  var userId = currentUser.uid
+
+
   return (<Container maxWidth={false} sx={{
       mt: 4,
       mb: 4,
       width: '85%'
     }}>
-    <form onSubmit={handleSubmit}>
+
+    <form onSubmit={handleSubmit((values) => {
+        showResults(values, userId)
+        history.push('/')
+      })}>
       <Paper style={{
           backgroundColor: '#cccccc'
         }} sx={{
