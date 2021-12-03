@@ -1,5 +1,19 @@
 # Group A Web App
 
+ReactJS Web Application to create and manage 1Announce account and announcements.
+
+## Dependencies
+
+- Node.JS
+- ReactJS
+- Material UI
+- datefns
+- axios
+- rxjs
+- firebase
+- jest
+- redux
+
 ## Usage
 
 1. First, install dependencies
